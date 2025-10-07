@@ -11,22 +11,17 @@ function obtenerParametrosURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const parametros = {};
 
-    // Obtener todos los parámetros disponibles
-    parametros.acta = urlParams.get('acta') || '12345';
-    parametros.categoria = urlParams.get('categoria') || 'Dotación Personal';
-    parametros.fechaentrega = urlParams.get('fechaentrega') || '';
-    parametros.nombres = urlParams.get('nombres') || 'Juan Pérez García';
-    parametros.fechaingreso = urlParams.get('fechaingreso') || '15/03/2024';
-    parametros.operacion = urlParams.get('operacion') || 'Operación Ejemplo';
-    parametros.identrega = urlParams.get('identrega') || 'ENT-2024-001';
-    parametros.url_evidencia = urlParams.get('url_evidencia') || '';
-    parametros.tipoclausula = urlParams.get('tipoclausula') || 'Cláusula de Ejemplo';
-    parametros.clausula = urlParams.get('clausula') || 'Este es un texto de ejemplo para la cláusula. Puede contener múltiples líneas y información importante sobre los términos y condiciones de la entrega.';
-    parametros.tallas = urlParams.get('tallas') || 'Camisa: M, Pantalón: 32, Zapatos: 42';
-    parametros.firma = urlParams.get('firma') || '';
-    parametros.iddotacion = urlParams.get('iddotacion') || 'EMP-001';
-    parametros.usuarioTexto = urlParams.get('usuarioTexto') || 'Sistema LogyApp';
-    parametros.itemsHtml = urlParams.get('itemsHtml') || '';
+    // Mapear todos los parámetros esperados
+    const keys = [
+        "acta", "categoria", "fechaentrega", "nombres", "fechaingreso",
+        "operacion", "identrega", "url_evidencia", "tipoclausula", "clausula",
+        "tallas", "firma", "iddotacion", "usuarioTexto", "itemsHtml"
+    ];
+
+    keys.forEach(k => {
+        const value = urlParams.get(k);
+        parametros[k] = value ? decodeURIComponent(value) : "";
+    });
 
     return parametros;
 }
@@ -35,52 +30,64 @@ function obtenerParametrosURL() {
 function cargarDatosFormulario() {
     const params = obtenerParametrosURL();
 
-    console.log('📋 Parámetros recibidos:', params);
+    console.log("📋 Parámetros recibidos:", params);
 
-    // Cargar datos en los elementos correspondientes
-    document.getElementById('categoria').textContent = params.categoria;
-    document.getElementById('acta').textContent = `Acta No. ${params.acta}`;
-    document.getElementById('nombres').textContent = params.nombres;
-    document.getElementById('operacion').textContent = params.operacion;
-    document.getElementById('fechaingreso').textContent = params.fechaingreso;
-    document.getElementById('identrega').textContent = params.identrega;
-    document.getElementById('tipoclausula').textContent = params.tipoclausula;
-    document.getElementById('clausula').textContent = params.clausula;
-    document.getElementById('tallas').textContent = params.tallas;
-    document.getElementById('iddotacion').textContent = params.iddotacion;
-    document.getElementById('usuarioTexto').textContent = params.usuarioTexto;
-    document.getElementById('nombreFirmante').textContent = params.nombres;
+    // Asignaciones directas al DOM
+    const setText = (id, value, prefix = "") => {
+        const el = document.getElementById(id);
+        if (el && value) el.textContent = prefix + value;
+    };
 
-    // Configurar fecha de entrega
+    // Campos principales
+    setText("categoria", params.categoria);
+    setText("acta", params.acta, "Acta No. ");
+    setText("nombres", params.nombres);
+    setText("operacion", params.operacion);
+    setText("fechaingreso", params.fechaingreso);
+    setText("identrega", params.identrega);
+    setText("tipoclausula", params.tipoclausula);
+    setText("clausula", params.clausula);
+    setText("tallas", params.tallas);
+    setText("iddotacion", params.iddotacion);
+    setText("usuarioTexto", params.usuarioTexto);
+    setText("nombreFirmante", params.nombres);
+
+    // Fecha de entrega
     if (params.fechaentrega) {
-        try {
-            const fecha = new Date(params.fechaentrega);
-            document.getElementById('fechaentrega').textContent =
-                `Fecha de Entrega: ${fecha.toLocaleDateString('es-CO')} ${fecha.toLocaleTimeString('es-CO')}`;
-        } catch (e) {
-            document.getElementById('fechaentrega').textContent = `Fecha de Entrega: ${params.fechaentrega}`;
-        }
+        const [fecha, hora] = params.fechaentrega.split("T");
+        document.getElementById("fechaentrega").textContent =
+            `Fecha de Entrega: ${fecha} ${hora || ""}`;
     }
 
-    // Configurar ID Usuario (extraer de nombres o usar un valor por defecto)
-    // En una implementación real, esto vendría como parámetro separado
-    const idUsuario = extraerIdUsuario(params.nombres) || params.iddotacion || '123456789';
-    document.getElementById('idUsuario').textContent = idUsuario;
+    // ID Usuario (se puede adaptar luego si AppSheet lo envía directamente)
+    document.getElementById("idUsuario").textContent = params.iddotacion || "123456789";
 
-    // Configurar imagen de evidencia si existe
+    // Evidencia (imagen)
     if (params.url_evidencia) {
-        const evidenceContainer = document.getElementById('client-evidence');
-        const evidenceImg = document.getElementById('evidenciaImagen');
+        const evidenceContainer = document.getElementById("client-evidence");
+        const evidenceImg = document.getElementById("evidenciaImagen");
         evidenceImg.src = params.url_evidencia;
         evidenceContainer.hidden = false;
     }
 
-    // Cargar items dinámicamente si se proporcionan
+    // Firma (imagen, si existe)
+    if (params.firma) {
+        const canvas = document.getElementById("signature-pad");
+        const ctx = canvas.getContext("2d");
+        const image = new Image();
+        image.onload = function () {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        };
+        image.src = params.firma;
+    }
+
+    // Items HTML (tabla)
     if (params.itemsHtml) {
         try {
-            document.getElementById('items').innerHTML = params.itemsHtml;
+            document.getElementById("items").innerHTML = decodeURIComponent(params.itemsHtml);
         } catch (e) {
-            console.error('Error cargando items HTML:', e);
+            console.error("Error cargando items HTML:", e);
         }
     }
 }
