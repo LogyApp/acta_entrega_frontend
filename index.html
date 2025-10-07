@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acta de entrega</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+
+    <div class="loading" id="loading">
+        <p>🔄 Generando PDF...</p>
+        <p>Por favor espere</p>
+    </div>
+
+    <div class="logo">
+        <img
+            src="https://raw.githubusercontent.com/LogyApp/ProvisionalRecaudo/2284a7a7b6adb992c70cf3ed280f5c01e7e9d99b/Logo%20Logyser%20con%20Nit.png">
+    </div>
+
+    <button class="print-button" onclick="imprimirPagina()">Imprimir</button>
+
+    <div id="contenido">
+        <!-- TU CONTENIDO ORIGINAL AQUÍ -->
+        <div class="header-section">
+            <h1 class="title">
+                <span class="title-main">CONSTANCIA DE ENTREGA</span>
+                <span id="categoria" class="title-sub">Dotación Personal</span>
+            </h1>
+            <p id="fechaentrega"></p>
+        </div>
+
+        <div class="highlight" id="acta">Acta No. 12345</div>
+
+        <div class="client-info">
+            <div class="client-info-box">
+                <p><span class="bold">Trabajador:</span> <span class="orange-text" id="nombres">Juan Pérez García</span>
+                </p>
+                <p><span class="bold">Operación:</span> <span class="orange-text" id="operacion">Operación
+                        Ejemplo</span></p>
+                <p><span class="bold">Fecha de Ingreso:</span> <span class="orange-text"
+                        id="fechaingreso">15/03/2024</span></p>
+                <p><span class="bold">Id Entrega:</span> <span class="orange-text" id="identrega">ENT-2024-001</span>
+                </p>
+                <p><span class="bold">ID Usuario:</span> <span class="orange-text" id="idUsuario">123456789</span></p>
+            </div>
+
+            <figure id="client-evidence" class="client-evidence" hidden>
+                <img id="evidenciaImagen" src="" alt="Foto evidencia">
+                <figcaption>Foto evidencia</figcaption>
+            </figure>
+        </div>
+
+        <div class="provisional-message" id="bloqueClausula">
+            <p>
+                <strong id="tipoclausula" class="clausula-title">Cláusula de Ejemplo</strong><br>
+                <span id="clausula">Este es un texto de ejemplo para la cláusula. Puede contener múltiples líneas y
+                    información importante sobre los términos y condiciones de la entrega.</span>
+            </p>
+        </div>
+
+        <div class="section-title">Detalles de la entrega</div>
+        <div id="tallas" class="tallas">Camisa: M, Pantalón: 32, Zapatos: 42</div>
+
+        <table class="items-table">
+            <colgroup>
+                <col class="col-elemento">
+                <col class="col-cantidad">
+                <col class="col-nota">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Elemento</th>
+                    <th>Cantidad</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody id="items">
+                <tr>
+                    <td>Camisa de trabajo</td>
+                    <td>2</td>
+                    <td>Color azul</td>
+                </tr>
+                <tr>
+                    <td>Pantalón de seguridad</td>
+                    <td>1</td>
+                    <td>Talla 32</td>
+                </tr>
+                <tr>
+                    <td>Botines de seguridad</td>
+                    <td>1</td>
+                    <td>Talla 42</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="signature-section">
+            <div class="signature-box">
+                <p><strong>Firma recibido del trabajador:</strong></p>
+                <canvas id="signature-pad"></canvas>
+                <div class="signature-buttons">
+                    <button id="clear">Borrar Firma</button>
+                    <button id="save">Guardar y Firmar Documento</button>
+                </div>
+                <p id="nombreFirmante" class="bold">Juan Pérez García</p>
+                <p id="estadoGuardado" style="color: green; font-weight: bold; display: none;"></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span>IdEmpleado: <span id="iddotacion">EMP-001</span></span>
+            <div class="separator"></div>
+            <span>Elaborado por: <span id="usuarioTexto">Sistema LogyApp</span></span>
+            <div class="separator"></div>
+            <span>Versión: <span id="hora"></span></span>
+            <div class="separator"></div>
+            <span>LogyApp</span>
+        </div>
+    </div>
+
+    <script src="./js/index.js"></script>
+
+</body>
+
+</html>

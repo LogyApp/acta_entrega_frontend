@@ -1,0 +1,285 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #fff;
+    color: #333;
+}
+
+.header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: #000b59;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.header-section .title {
+    margin: 0;
+    line-height: 1.1;
+}
+
+.header-section .title-main {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.header-section .title-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.header-section p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.logo img {
+    max-width: 200px;
+    height: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #F55400;
+    color: #fff;
+    text-align: center;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.items-table th,
+.items-table td {
+    text-align: center !important;
+    padding: 10px;
+    word-break: break-word;
+}
+
+.items-table .col-elemento {
+    width: 40%;
+}
+
+.items-table .col-cantidad {
+    width: 15%;
+}
+
+.items-table .col-nota {
+    width: 40%;
+}
+
+.signature-section {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.signature-box {
+    text-align: center;
+    width: min(420px, 100%);
+    padding: 10px;
+}
+
+.client-info {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 16px;
+    margin-bottom: 2px 0;
+}
+
+.client-info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #000b59;
+    line-height: 1.05;
+}
+
+.client-evidence {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: min(320px, 45%);
+}
+
+.client-evidence img {
+    max-width: 100%;
+    max-height: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.provisional-message {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #333;
+    text-align: justify;
+    padding: 2px;
+    background-color: #FBE2D5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 16px;
+}
+
+.footer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #FBE2D5;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer span {
+    margin: 0 10px;
+}
+
+.footer .separator {
+    border-left: 1px solid #555;
+    height: 20px;
+    margin: 0 10px;
+}
+
+.highlight {
+    color: #F55400;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    margin: 2px 0;
+}
+
+.section-title {
+    font-size: 15px;
+    color: #000b59;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.tallas {
+    text-align: center;
+    margin: 6px 0 10px;
+    font-size: 13px;
+    color: #000b59;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.orange-text {
+    color: #F55400;
+}
+
+/* ESTILOS PARA LA FIRMA MANUAL */
+#signature-pad {
+    border: 2px solid #333;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 400px;
+    height: 200px;
+    background: #fff;
+    display: block;
+    margin: 0 auto;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+.signature-buttons {
+    margin-top: 10px;
+}
+
+.signature-buttons button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+}
+
+#clear {
+    background: #e3342f;
+}
+
+#save {
+    background: #38a169;
+}
+
+.print-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #000b59;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    z-index: 1000;
+}
+
+.print-button:hover {
+    background-color: #F55400;
+}
+
+.loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 10000;
+    text-align: center;
+}
