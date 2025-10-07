@@ -1,6 +1,4 @@
-
-// CONFIGURACIÓN
-const BACKEND_URL = 'http://localhost:3000/api/upload';
+const BACKEND_URL = 'https://acta-entrega-backend-594761951101.europe-west1.run.app/api/upload';
 
 // Variables globales para el sistema de firma manual
 let isDrawing = false;
